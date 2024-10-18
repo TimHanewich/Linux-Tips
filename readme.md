@@ -75,3 +75,49 @@ print(result.stderr) # print standard error
 ```
 
 `stdout` is for standard output, `stderr` is for standard error. But I noticed, even when the command succeeded, it still sometimes puts it in stderr. Probably good to combine both and evaluate the combination to be safe.
+
+## Troubleshooting on an Orange Pi 3 LTS
+I plugged this same webcam into my Orange Pi 3 LTS in October 2024 and had some trouble with getting the commands above to work. After consulting ChatGPT and troubleshooting (see chat [here](https://chatgpt.com/share/67128689-a1a4-8012-be21-3d34ed3c4473)), I was able to get it to work. 
+
+Long story short, you can run `ls /dev/video*` to see if the webcam connected (that you can verify is connected via `lsusb`) is recognized as a webcam.
+
+This will output, for example:
+
+```
+root@orangepi3-lts:~# ls /dev/video*
+/dev/video0  /dev/video1  /dev/video2
+```
+
+Anyway, after running the `fswebcam` command above on the OPi 3 LTS, I was getting this error:
+
+```
+root@orangepi3-lts:~# fswebcam
+--- Opening /dev/video0...
+Trying source module v4l2...
+/dev/video0 opened.
+No input was specified, using the first.
+Unable to query input 0.
+VIDIOC_ENUMINPUT: Inappropriate ioctl for device
+```
+
+As suggested by ChatGPT, I ran `v4l2-ctl --list-devices` and got this:
+
+```
+root@orangepi3-lts:~# v4l2-ctl --list-devices
+cedrus (platform:cedrus):
+        /dev/video0
+        /dev/media0
+
+UVC Camera (046d:0825) (usb-xhci-hcd.1.auto-1):
+        /dev/video1
+        /dev/video2
+        /dev/media1
+```
+
+The above indicated that the default that was being used for capture, `/video0`, was not the actual camera. Instead, we could specify to `fswebcam` to use `/video1` to capture:
+
+```
+fswebcam -d /dev/video1 img.jpg
+```
+
+And that worked!
