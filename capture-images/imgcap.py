@@ -3,7 +3,7 @@ import requests
 
 def capture() -> None:
     """Makes a command line command to capture an image using fswebcam"""
-    cmd = "fswebcam --no-banner -r 160x120 img.jpg"
+    cmd = "fswebcam -d /dev/video1 --no-banner -r 160x120 img.jpg"
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
 
 def upload(path:str = "./img.jpg", url:str = "https://webhook.site/40394d10-c02b-4ff4-b80e-14a09ea7f935") -> None:
