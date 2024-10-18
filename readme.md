@@ -76,6 +76,13 @@ print(result.stderr) # print standard error
 
 `stdout` is for standard output, `stderr` is for standard error. But I noticed, even when the command succeeded, it still sometimes puts it in stderr. Probably good to combine both and evaluate the combination to be safe.
 
+## Alternative: FFMPEG
+Alternatively, you could also use `ffmpeg` instead of `fswebcam`:
+
+```
+ffmpeg -f v4l2 -video_size 1280x720 -i /dev/video1 -vframes 1 output.jpg
+```
+
 ## Troubleshooting on an Orange Pi 3 LTS
 I plugged this same webcam into my Orange Pi 3 LTS in October 2024 and had some trouble with getting the commands above to work. After consulting ChatGPT and troubleshooting (see chat [here](https://chatgpt.com/share/67128689-a1a4-8012-be21-3d34ed3c4473)), I was able to get it to work. 
 
