@@ -49,6 +49,7 @@ fswebcam -r 640x480 image.jpg
 As a side note, the resolutions I've determined my [Logitech C270 webcam](https://www.logitech.com/assets/31702/2/c270620-002802003403gsamr.pdf) can capture in:
 - 160x120
 - 352x288 (default)
+- 1280x720 (720p)
 
 ## Uploading Images
 Obviously, you can't view the image from the command line/SSH. A simple way to "upload" this I've found is to use [curl](https://www.geeksforgeeks.org/curl-command-in-linux-with-examples/) to make a POST request to an endpoint with the image as the body.
