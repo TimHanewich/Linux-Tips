@@ -77,6 +77,8 @@ print(result.stderr) # print standard error
 
 `stdout` is for standard output, `stderr` is for standard error. But I noticed, even when the command succeeded, it still sometimes puts it in stderr. Probably good to combine both and evaluate the combination to be safe.
 
+**A very simple example script of this, in Python, can be found in the [imgcap.py](./imgcap.py) file.
+
 ## Alternative: FFMPEG
 Alternatively, you could also use `ffmpeg` instead of `fswebcam`:
 
