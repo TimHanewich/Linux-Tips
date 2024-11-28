@@ -131,3 +131,14 @@ fswebcam -d /dev/video1 img.jpg
 ```
 
 And that worked!
+
+## The Need to Skip Frames
+When testing with a Logitech C270 on a Raspberry Pi Zero W (through a USB adapter), I noticed the image wasn't being captured. The light on the webcam would temporarily turn on for just a very slight moment, but the image that was captured was fully black. I didn't know why this was, but I tried the `--skip` parameter of `fswebcam`, instructing it to wait a number of frames, and it worked!
+
+Example:
+
+```
+fswebcam --device /dev/video0 image.jpg --skip 12
+```
+
+I don't know why this is, but perhaps the computing power of the Pi Zero W (in this case) was slow so it took more time to actually begin reading the image data? I don't know!
