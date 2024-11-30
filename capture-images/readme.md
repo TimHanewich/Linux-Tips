@@ -142,3 +142,6 @@ fswebcam --device /dev/video0 image.jpg --skip 12
 ```
 
 I don't know why this is, but perhaps the computing power of the Pi Zero W (in this case) was slow so it took more time to actually begin reading the image data? I don't know!
+
+## Other Tips
+`sudo dmesg | grep usb` displays the kernel message buffer and filter the output to show only messages related to USB devices, allowing you to see power issues, resets, disconnects, etc. Helps diagnose issues with the webcam USB device.
