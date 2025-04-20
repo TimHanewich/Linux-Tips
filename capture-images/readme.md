@@ -86,6 +86,12 @@ Alternatively, you could also use `ffmpeg` instead of `fswebcam`:
 ffmpeg -f v4l2 -video_size 1280x720 -i /dev/video1 -vframes 1 output.jpg
 ```
 
+I have used this command in FFMPEG to capture photos one time per 60 seconds and place in a folder under the same name every time. And then a python script will run in the background at the same time to catch that file and rename it to the current datetime stamp right away.
+
+```
+ffmpeg -video_size 1280x720 -i /dev/video0 -vf "fps=0.01667,drawtext=text='%{localtime} UTC': x=10: y=10: fontcolor=white: fontsize=24: box=1: boxcolor=0x00000099" -update 1 ./temp.jpg
+```
+
 ## Troubleshooting on an Orange Pi 3 LTS
 I plugged this same webcam into my Orange Pi 3 LTS in October 2024 and had some trouble with getting the commands above to work. After consulting ChatGPT and troubleshooting (see chat [here](https://chatgpt.com/share/67128689-a1a4-8012-be21-3d34ed3c4473)), I was able to get it to work. 
 
